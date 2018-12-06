@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	<style type="text/css">
+		*{
+			padding: 0;
+			margin: 0;
+		}
+		#fk{
+			width: 1200px;
+			height: 535px;
+			border: 2px solid black;
+			margin: 30px auto;
+			position: relative;
+			
+		}
+		#fk img{
+			position: absolute;
+			left: 0;
+			top: 0;
+			display: none;
+		}
+		#fk ul{
+			position: absolute;
+			left: 528px;
+			bottom: 23px;
+			
+		}
+		#fk ul li{
+			width: 12px;
+			height: 12px;
+			background: #DDDDDD;
+			list-style: none;
+			float:left;
+			margin-right: 8px;
+			border-radius: 50%;
+		}
+	</style>
+	</head>
+	<body>
+		
+		<div id="fk">
+			<img src="1.jpg" style="display: block;"/>
+			<img src="2.jpg"/>
+			<img src="3.jpg"/>
+			<img src="4.jpg"/>
+			<img src="5.jpg"/>
+			<img src="6.jpg"/>
+		 <ul>
+			<li style="background: red;"></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+		</ul>
+		</div>
+		<script type="text/javascript">
+			var fk=document.getElementById("fk");
+			var lis=fk.getElementsByTagName("li");
+			var is = fk.getElementsByTagName("img");
+			var c =0;
+//			定时器调用的函数
+            function autorun(){
+                c++;
+				if(c==6){
+					c=0;
+				}
+				for(var i=0;i<6;i++){
+					is[i].style.display="none";
+				}
+				is[c].style.display = "block";
+				for(var i=0;i<6;i++){
+					lis[i].style.background="#DDDDDD";
+				}
+				lis[c].style.background="red";
+            }
+			var timer=setInterval(autorun,1000);
+//		给所有li加事件
+            for (var i=0;i<lis.length;i++) {
+//          	将序号存到每个li上
+            	lis[i].xuhao=i;
+            	lis[i].onmouseover=function(){
+//          		停止定时器
+            		clearInterval(timer);
+//          		获得序号
+                    c = this.xuhao;
+                    for(var i=0;i<6;i++){
+					   is[i].style.display="none";
+				    }
+				       is[c].style.display = "block";
+				    for(var i=0;i<6;i++){
+					   lis[i].style.background="#DDDDDD";
+				    }
+				    lis[c].style.background="red";
+            	}
+//              加鼠标移出事件
+                lis[i].onmouseout = function(){
+//          	重新设置定时器
+            	   timer = setInterval(autorun,1000);
+                }
+            }
+		</script>
+	</body>
+</html>
