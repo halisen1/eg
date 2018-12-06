@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	    <style type="text/css">
+	    	#hua{
+	    		background: gray;
+	    		display: block;
+	    		margin: 0 auto;
+	    		position: relative;
+	    		margin-top: 300px;
+	    </style>
+	</head>
+	<body>
+		<canvas id="hua" width="200" height="50"></canvas>
+
+		<script type="text/javascript">
+			var canvas = document.getElementById("hua");
+			var cv = canvas.getContext('2d');
+	        cv.font = "30px arial";
+	        var words = "FMAKLNGJAKNDGVJKDNCKLN";
+	        for(var i=0;i<4;i++){
+	        	var num= Math.floor(Math.random()*(words.length-1+1)+0);
+	        	var l = Math.floor(Math.random()*((i*50+20)+1-i*50)+i*50);
+	        	var t = Math.floor(Math.random()*(45+1-30)+30);
+	        	var r = Math.floor(Math.random()*256);
+	        	var g = Math.floor(Math.random()*256);
+	        	var b = Math.floor(Math.random()*256);
+	        	cv.fillStyle = "rgb("+r+","+g+","+b+")";
+	        	//随机角度
+	        	var d=Math.floor(Math.random()*(3+1+3)-3);
+	        	cv.rotate(d*Math.PI/180);
+	        	cv.fillText(words[num],l,t);
+	        	//干扰线
+	        	for(var m=0;m<10;m++){
+	        	var startx = Math.floor(Math.random()*201);
+	        	var starty = Math.floor(Math.random()*51);
+	        	var endx   = Math.floor(Math.random()*201);
+	        	var endy   = Math.floor(Math.random()*51);
+	        	cv.beginPath();
+	        	cv.moveTo(startx,starty);
+	        	cv.lineTo(endx,endy);
+	        	cv.closePath();
+	        	var r = Math.floor(Math.random()*256);
+	        	var g = Math.floor(Math.random()*256);
+	        	var b = Math.floor(Math.random()*256);
+	        	var o = Math.floor(Math.random()*101);
+//	        	cv.strokeStyle="#FFFF00";
+	        	cv.strokeStyle = "rgba("+r+","+g+","+b+","+o/100+")";
+                cv.stroke();
+	        	}
+	        }
+		</script>
+	</body>
+</html>
