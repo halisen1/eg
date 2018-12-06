@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+        <style type="text/css">
+        	*{
+        		padding: 0;
+        		margin: 0;
+        		
+        	}
+        	#tab{
+        		width: 600px;
+        		height: 500px;
+        		border: 2px solid black;
+        		margin: 20px auto;
+        		position: relative;
+        	}
+        	#tab ul li{
+        	    float: left;
+        	    width: 200px;
+        	    height: 50px;
+        	    list-style: none;
+        	    font-size: 30px;
+        	    line-height: 50px;
+        	    text-align: center;
+        	    color: white;  
+        	}
+        	.con{
+        		width: 550px;
+        		height: 400px;
+        		position: absolute;
+        		left: 25px;
+        		top: 70px;
+        		display: none;
+        		
+        	}
+        </style>
+        <script type="text/javascript">
+			window.onload = function(){
+			var tab = document.getElementById("tab");
+			var lis = tab.getElementsByTagName("li");
+			var cons  = tab.getElementsByClassName("con");
+//		循环,给li加单击事件
+		for (var i=0;i<lis.length;i++) {
+//			给i号li加序号
+			lis[i].xuhao = i;
+//			给i号li加单击事件
+			lis[i].onmouseover = function(){
+//				让所有的con隐藏
+				for (var i=0;i<3;i++) {
+					cons[i].style.display = 'none';
+				}
+//				让this.xuhao对应的con显示
+				cons[this.xuhao].style.display = "block";
+			}
+		}
+       }
+		</script>
+	</head>
+	<body>
+		<div id="tab">
+			<ul>
+				<li style="background: blue;">新闻</li>
+			    <li style="background: orangered;">体育</li>
+			    <li style="background: green;">娱乐</li>		
+			</ul>
+			<div class="con" style="background: blue;display:block"></div>
+			<div class="con" style="background: orangered;"></div>
+			<div class="con" style="background: green;"></div>
+		</div>
+
+	</body>
+</html>
