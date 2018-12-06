@@ -1,0 +1,60 @@
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			body{
+				padding: 100px 200px;	
+			}
+			#pro{
+				width:600px;
+				height: 15px;
+			    background: lightblue;
+			    position: relative;
+			    
+			}
+			#pro #inpro{
+				width:0px;
+				height: 15px;
+				background: yellow;
+				
+			}
+		</style>
+	</head>
+	<body>
+		<input type="button" id="start" value="开始"/>
+		<input type="button" id="pause" value="暂停"/>
+		<br /><br />
+		<video src="(1)lesson1第一段.mp4"  width=600 id="v" ></video>
+		<div id="pro">
+			<div id="inpro">
+			</div>
+		</div>
+		<script type="text/javascript">
+			var v=document.getElementById("v");
+			document.getElementById("start").onclick = function(){
+				v.play();
+			}
+			document.getElementById("pause").onclick = function(){
+			   v.pause();
+			}
+			var pro = document.getElementById("pro");
+			var inpro =document.getElementById("inpro");
+			v.onplay = function(){
+				setInterval(function(){
+					var ctime = v.currentTime;
+					var alltime = v.duration;
+					var inprot = ctime/alltime*600;
+					inpro.style.width=inprot+'px';
+				},500)
+			}
+			pro.onclick = function(e){
+				var ev = window.event || e;
+				var mx = ev.layerX ||offsetX;
+				var ctime = mx/600*v.duration;
+				v.currentTime = ctime;
+				inpro.style.width = mx+'px';
+				console.log(inpro.style.width);
+				
+			}
+		</script>
+	</body>
+</html>
