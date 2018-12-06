@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	    <style type="text/css">
+	    	#hua{
+	    		background: gray;
+	    		display: block;
+	    		margin: 0 auto;
+	    		position: relative;
+	    		margin-top: 30px;
+	    		
+	    	}
+	    	#color{
+	    		margin-left: 300px;
+	    		margin-top: 15px;
+	    	}
+	    </style>
+	</head>
+	<body>
+		<input type="color" id="color"/>
+		<input type="range" id="range" value="2" min="1" max="10" />
+		<span id="span">
+			2
+		</span>
+		<input type="button"id="xiangpi" value="橡皮擦"/>
+		<canvas id="hua" width="800" height="500"></canvas>
+
+		<script type="text/javascript">
+			var canvas = document.getElementById("hua");
+			var color =  document.getElementById("color");
+			var range = document.getElementById("range");
+			var xiangpi = document.getElementById("xiangpi");
+			//获得绘画环境（相当于铺了一层画布）
+			var cv = canvas.getContext('2d');
+			cv.strokeStyle = color.value;
+			cv.lineWidth = range.value;
+			canvas.onmousedown = function(e){
+				var ev = window.event || e;
+				//获得鼠标位置
+				var mousex = ev.layerX || ev.offsetX;
+				var mousey = ev.eventY || ev.offsetY;
+				//设置起点
+				cv.beginPath();
+				cv.moveTo(mousex,mousey);
+			    //加鼠标移动事件
+			    canvas.onmousemove = function(e){
+                var nv = window.event ||e;
+                var newx = nv.layerX || nv.offsetX;
+                var newy = nv.layerY || nv.offsetY;
+                cv.lineTo(newx,newy);
+                cv.stroke();
+			    }
+			}
+			//鼠标抬起事件
+			canvas.onmouseup = function(){
+				//取消鼠标移动事件
+				canvas.onmousemove =null;
+				cv.closePath();
+			}
+			color.onchange = function(){
+				cv.strokeStyle = this.value;
+			}
+			range.onchange = function(){
+				cv.lineWidth = range.value;
+			    document.getElementById("span").innerHTML = range.value;
+			}
+			xiangpi.onclick = function(){
+				cv.strokeStyle = "gray";
+			}
+		</script>
+	</body>
+</html>
